@@ -4,6 +4,7 @@ export COLOR_NC='\e[0m' # No Color
 export COLOR_GREEN='\e[0;32m'
 export COLOR_RED='\e[0;31m'
 
+echo -n "Bee version " ; bee version 
 echo ""
 echo "Your address:"
 curl -s localhost:1635/addresses | jq .ethereum
