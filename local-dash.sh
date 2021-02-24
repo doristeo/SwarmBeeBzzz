@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 export COLOR_NC='\e[0m' # No Color
