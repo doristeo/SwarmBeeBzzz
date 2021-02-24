@@ -33,11 +33,13 @@ do
             ;;
         "chequebook --gBzz--> node")
             echo "Move gBzz from cheque book to address of node..."
-            curl -XPOST -s localhost:1635/chequebook/withdraw/?amount/=1000 | jq
+            curl -XPOST -s localhost:1635/chequebook/withdraw\?amount\=1000 | jq
+            
             ;;
         "chequebook <--gBzz-- node")
             echo "Move gBzz from node's address to cheque book..."
-            curl -XPOST -s localhost:1635/chequebook/deposit/?amount/=1000 | jq
+            curl -XPOST -s localhost:1635/chequebook/deposit\?amount\=1000 | jq
+            
             ;;
 
         "Quit")
