@@ -19,7 +19,7 @@ else
 fi
 echo ""
 PS3='Please enter your choice:'
-options=("Balance" "Manual cashout" "gBZZ from chequebook to node's address" "gBZZ from address to chequebook" "Quit")
+options=("Balance" "Manual cashout" "chequebook --gBzz--> node" "chequebook <--gBzz-- node" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -31,11 +31,11 @@ do
             echo "Manual cashout (./cashout.sh cashout-all)..."
             ~/cashout.sh cashout-all
             ;;
-        "gBZZ from chequebook to node's address")
+        "chequebook --gBzz--> node")
             echo "Move gBzz from cheque book to address of node..."
             curl -XPOST -s localhost:1635/chequebook/withdraw/?amount/=1000 | jq
             ;;
-        "gBZZ from address to chequebook")
+        "chequebook <--gBzz-- node")
             echo "Move gBzz from node's address to cheque book..."
             curl -XPOST -s localhost:1635/chequebook/deposit/?amount/=1000 | jq
             ;;
