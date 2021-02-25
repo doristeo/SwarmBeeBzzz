@@ -31,7 +31,7 @@ else
 fi
 echo ""
 PS3='Please enter your choice:'
-options=("Balance" "Manual cashout" "chequebook --gBzz--> node" "chequebook <--gBzz-- node" "Quit")
+options=("Balance" "Manual cashout" "chequebook --gBzz--> node" "chequebook <--gBzz-- node" "Restart node" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -51,9 +51,14 @@ do
             echo "Move gBzz from node's address to cheque book..."
             curl -XPOST -s localhost:1635/chequebook/deposit\?amount\=1000 | jq
             ;;
+        "Restart node")
+            echo "Restarting node (systemctl restart bee)..."
+            systemctl restart bee
+            ;;
         "Quit")
             break
             ;;
         *) echo "invalid option $REPLY";;
     esac
 done
+
