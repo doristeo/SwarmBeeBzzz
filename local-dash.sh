@@ -51,11 +51,13 @@ do
             ;;
         "chequebook --gBzz--> node")
             echo "Move gBzz from cheque book to address of node..."
-            curl -XPOST -s localhost:1635/chequebook/withdraw\?amount\=1000 | jq
+            thash=$(curl -XPOST -s localhost:1635/chequebook/withdraw\?amount\=1000 | jq .transactionHash | tr -d '"')
+            echo "  Etherscan https://goerli.etherscan.io/tx/$thash"
             ;;
         "chequebook <--gBzz-- node")
             echo "Move gBzz from node's address to cheque book..."
-            curl -XPOST -s localhost:1635/chequebook/deposit\?amount\=1000 | jq
+            thash=$(curl -XPOST -s localhost:1635/chequebook/deposit\?amount\=1000 | jq .transactionHash |  tr -d '"')
+            echo "  Etherscan https://goerli.etherscan.io/tx/$thash"
             ;;
         "Restart node")
             echo "Restarting node (systemctl restart bee)..."
@@ -67,4 +69,3 @@ do
         *) echo "invalid option $REPLY";;
     esac
 done
-
