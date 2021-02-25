@@ -46,8 +46,8 @@ do
             curl -s localhost:1635/chequebook/balance
             ;;
         "Manual cashout")
-            echo "Manual cashout (./cashout.sh cashout-all)..."
-            ~/cashout.sh cashout-all
+            echo "Manual cashout (./cashout.sh cashout-all >> /root/cash.log)..."
+            ~/cashout.sh cashout-all >> /root/cash.log
             ;;
         "chequebook --gBzz--> node")
             echo "Move gBzz from cheque book to address of node..."
