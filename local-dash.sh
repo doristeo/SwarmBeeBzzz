@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ver.0.5.3
+# ver.0.5.4
 # (C)@tengizi, RU Swarm Team
 export COLOR_NC='\e[0m' # No Color
 export COLOR_GREEN='\e[0;32m'
@@ -38,7 +38,7 @@ fi
 
 echo ""
 PS3='Please enter your choice:'
-options=("Balance" "Manual cashout" "chequebook --gBzz--> node" "chequebook <--gBzz-- node" "Restart node" "Quit")
+options=("Balance" "Manual cashout" "chequebook --gBzz--> node" "chequebook <--gBzz-- node" "Restart node" "Stop node" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -63,6 +63,10 @@ do
         "Restart node")
             echo "Restarting node (systemctl restart bee)..."
             systemctl restart bee
+            ;;
+        "Stop node")
+            echo "Stopping node (systemctl stop bee)..."
+            systemctl stop bee
             ;;
         "Quit")
             break
