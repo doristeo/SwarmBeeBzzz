@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# ver.0.5.2
+# ver.0.5.3
+# (C)@tengizi, RU Swarm Team
 export COLOR_NC='\e[0m' # No Color
 export COLOR_GREEN='\e[0;32m'
 export COLOR_RED='\e[0;31m'
