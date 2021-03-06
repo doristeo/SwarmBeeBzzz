@@ -18,7 +18,7 @@ var mysqlPassptr *string
 
 //---------------------------------------------------------------------------------------------------------------------------------
 func CreateDatabase() (*sql.DB, error) {
-	serverName := "10.1.1.109:3306"
+	serverName := "localhost:3306"
 	user := *mysqlUserptr
 	password := *mysqlPassptr
 	dbName := "swarms"
@@ -56,7 +56,7 @@ func postFunction(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println(s)
 	_, err = database.Exec(s)
 	if err != nil {
-		log.Println("Database INSERT failed" + s)
+		log.Println("Database INSERT failed --->>  \n" + s)
 	}
 }
 
@@ -66,6 +66,12 @@ func main() {
 	mysqlUserptr = flag.String("user", "root", "MySQL user")
 	mysqlPassptr = flag.String("pass", "root", "MySQL password")
 	flag.Parse()
+
+	database, err := CreateDatabase()
+	if err != nil {
+		log.Fatal("Database connection failed")
+	}
+	defer database.Close()
 
 	router := mux.NewRouter()
 	router.HandleFunc("/", postFunction).Methods("POST")
