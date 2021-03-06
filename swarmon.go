@@ -13,7 +13,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var mysqlDBptr *string
 var mysqlUserptr *string
 var mysqlPassptr *string
 
@@ -54,10 +53,10 @@ func postFunction(w http.ResponseWriter, r *http.Request) {
 
 	s := "INSERT nodes(name, peers, diskavail, diskfree) VALUES ('" + logdata.Name + "', " + strconv.Itoa(logdata.Peers) + ", " +
 		strconv.Itoa(logdata.Diskavail) + ", " + strconv.Itoa(logdata.Diskfree) + ")"
-	fmt.Println(s)
+	//fmt.Println(s)
 	_, err = database.Exec(s)
 	if err != nil {
-		log.Println("Database INSERT failed")
+		log.Println("Database INSERT failed" + s)
 	}
 }
 
