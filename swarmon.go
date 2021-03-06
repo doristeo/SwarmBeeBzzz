@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -12,11 +13,15 @@ import (
 	"github.com/gorilla/mux"
 )
 
+var mysqlDBptr *string
+var mysqlUserptr *string
+var mysqlPassptr *string
+
 //---------------------------------------------------------------------------------------------------------------------------------
 func CreateDatabase() (*sql.DB, error) {
 	serverName := "10.1.1.109:3306"
-	user := "home"
-	password := "111111"
+	user := *mysqlUserptr
+	password := *mysqlPassptr
 	dbName := "swarms"
 
 	connectionString := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&collation=utf8mb4_unicode_ci&parseTime=true&multiStatements=true", user, password, serverName, dbName)
@@ -58,6 +63,11 @@ func postFunction(w http.ResponseWriter, r *http.Request) {
 
 //---------------------------------------------------------------------------------------------------------------------------------
 func main() {
+
+	mysqlUserptr = flag.String("user", "root", "MySQL user")
+	mysqlPassptr = flag.String("pass", "root", "MySQL password")
+	flag.Parse()
+
 	router := mux.NewRouter()
 	router.HandleFunc("/", postFunction).Methods("POST")
 
@@ -67,7 +77,4 @@ func main() {
 	}
 	log.Fatal(srv.ListenAndServe())
 
-	//setupRouter(router)
-
-	//log.Fatal(http.ListenAndServe(":8080", router))
 }
